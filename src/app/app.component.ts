@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
 
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styles: []
 })
 export class AppComponent {
-  title = 'wishlist';
+  	constructor(router: Router) {
+  		// Make sure everybody auths first
+  		router.navigateByUrl('/auth');
+  	}
 }
