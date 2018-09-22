@@ -1,3 +1,2 @@
-<p>
-  auth works! <a routerLink="/lists">Go to lists</a>
-</p>
+<p>{{message}}</p>
+<button *ngIf="hadError" (click)="signIn()">Try Again</button>

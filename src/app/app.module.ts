@@ -6,8 +6,11 @@ import {MaterialModule} from './material/material.module';
 
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
-import { AppRoutingModule } from './app-routing.module';
 import { ListsComponent } from './lists/lists.component';
+
+import { AppRoutingModule } from './app-routing.module';
+
+import {AuthService} from './auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import { ListsComponent } from './lists/lists.component';
     MaterialModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
