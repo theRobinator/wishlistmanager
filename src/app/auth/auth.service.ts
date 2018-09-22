@@ -25,6 +25,14 @@ export class AuthService {
 		}
 	}
 
+	public getAuthToken(): string {
+		if (!this.isAuthed()) {
+			return null;
+		} else {
+			return this.apiClient.currentUser.get().getAuthResponse().id_token;
+		}
+	}
+
 	public isAuthed(): boolean {
 		if (!this.apiClient) {
 			return false;
