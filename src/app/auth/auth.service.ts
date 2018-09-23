@@ -49,11 +49,22 @@ export class AuthService {
 		} else {
 			this.signInDeferred = new Deferred();
 			this.initDeferred.then(() => {
-				return this.apiClient.signIn();
-			}).then(user => {
-				this.signInDeferred.resolve(user);
+				if (this.isAuthed()) {
+					this.signInDeferred.resolve(this.apiClient.currentUser.get());
+					this.signInDeferred = null;
+				} else {
+					this.apiClient.signIn().then(user => {
+						this.signInDeferred.resolve(user);
+						this.signInDeferred = null;
+					}, error => {
+						this.signInDeferred.reject(error);
+						this.signInDeferred = null;
+					})
+				}
+				return ;
 			}).catch(error => {
 				this.signInDeferred.reject(error);
+				this.signInDeferred = null;
 			});
 			return this.signInDeferred;
 		}

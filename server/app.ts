@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 
 import {authMiddleware} from './authmiddleware';
+import * as Endpoints from './endpoints';
 
 const app = express();
 
@@ -12,13 +13,12 @@ process.on('unhandledRejection', reason => {
 	console.error(reason);
 })
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
-app.get('/lists/get', authMiddleware, (req, res) => {
-	res.writeHead(200);
-	res.write('Auth success!');
-	res.end();
-});
+app.post('/lists/get', authMiddleware, Endpoints.listsGet);
+app.post('/items/add', authMiddleware, Endpoints.itemsAdd);
+app.post('/items/delete', authMiddleware, Endpoints.itemsDelete);
+app.post('/items/update', authMiddleware, Endpoints.itemsUpdate);
 
 app.listen(3000, () => {
 	console.log('Node server listening on port 3000');

@@ -27,7 +27,7 @@ export class AuthComponent implements OnInit {
   		this.authService.signIn().then(user => {
 			const profile = user.getBasicProfile();
 			this.message = `You are signed in as ${profile.getName()} with email address ${profile.getEmail()}!`;
-			setTimeout(() => this.router.navigateByUrl('/lists'), 2000);
+			this.router.navigateByUrl('/lists');
 		}, error => {
 			this.message = `Sign in failed with error ${error['error']}`;
 			this.hadError = true;

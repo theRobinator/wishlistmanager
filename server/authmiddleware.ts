@@ -37,12 +37,13 @@ export async function authMiddleware(request: express.Request, response: express
 		fail(response);
 		return;
 	} else {
+		request['authedUserEmail'] = userEmail;
 		next();
 	}
 }
 
 function fail(response: express.Response) {
 	response.writeHead(401);
-	response.write('Unauthorized :(');
+	response.write('{"message": "Unauthorized"}');
 	response.end();	
 }

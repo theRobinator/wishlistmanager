@@ -29,6 +29,7 @@
     "core-js": "^2.5.4",
     "express": "^4.16.3",
     "google-auth-library": "^2.0.0",
+    "mysql2": "^1.6.1",
     "nodemon": "^1.18.4",
     "rxjs": "~6.2.0",
     "zone.js": "~0.8.26"
