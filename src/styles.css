@@ -1,2 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/purple-green.css";
+.list-container {
+	max-width: 1024px;
+	margin: 10px auto;
+}
+
+.my-item-text {
+	flex: 1 1 auto;
+}
+
+.my-delete-button {
+	flex: 0 0 auto;
+	cursor: pointer;
+}
+
+.their-item {
+	margin-bottom: 25px;
+}
+
+.their-item-button {
+	margin: 10px !important;
+	position: absolute !important;
+	right: 0;
+	z-index: 1;
+}

@@ -1,48 +1,50 @@
-<mat-accordion>
-	<mat-expansion-panel>
-		<mat-expansion-panel-header>
-			Me
-		</mat-expansion-panel-header>
+<mat-toolbar color="primary">Wish List</mat-toolbar>
+<div class="list-container">
+	<mat-accordion>
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				Me
+			</mat-expansion-panel-header>
 
-		<mat-list>
-			<mat-list-item *ngFor="let item of myItems">
-				<item-textarea style="width: 60%" placeholder="I want..." [(text)]="item.description" (textChange)="updateItem(item)"></item-textarea>
-				<button mat-mini-fab (click)="deleteItem(item)" [disabled]="loadingItems[item['id']]">
-					<mat-icon color="warn">delete</mat-icon>
-				</button>
-			</mat-list-item>
-			<mat-list-item>
-				<item-textarea style="width: 60%" placeholder="Add a new item here" [(text)]="newItem.description"></item-textarea>
-			</mat-list-item>
-			<mat-list-item>
-				<button mat-raised-button (click)="addItem()" [disabled]="addingItem || !newItem.description">
-					Save New Item
-				</button>
-			</mat-list-item>
-		</mat-list>
-
-	</mat-expansion-panel>
-
-	<mat-expansion-panel *ngFor="let list of otherLists">
-		<mat-expansion-panel-header>
-			{{list['ownerName']}}
-		</mat-expansion-panel-header>
-
-		<mat-list>
-			<mat-list-item *ngFor="let item of list['items']">
-				<div matLine>
-					{{item.description}}
-					<button mat-raised-button (click)="markBought(item)" *ngIf="!item.buyerComments">
-						I Bought This
+			<mat-list>
+				<mat-list-item *ngFor="let item of myItems">
+					<item-textarea class="my-item-text" placeholder="I want..." [(text)]="item.description" (textChange)="updateItem(item)"></item-textarea>
+					<!-- <button mat-mini-fab (click)="deleteItem(item)" [disabled]="loadingItems[item['id']]"> -->
+						<mat-icon class="my-delete-button" color="warn" (click)="deleteItem(item)">delete</mat-icon>
+					<!-- </button> -->
+				</mat-list-item>
+				<mat-list-item>
+					<item-textarea class="my-item-text" placeholder="Add a new item here" [(text)]="newItem.description"></item-textarea>
+				</mat-list-item>
+				<mat-list-item>
+					<button mat-raised-button (click)="addItem()" [disabled]="addingItem || !newItem.description">
+						Save New Item
 					</button>
-				</div>
-				<div matLine>
-					<item-textarea placeholder="Add your comments here" [(text)]="item.buyerComments" (textChange)="updateItem(item)"></item-textarea>
-				</div>
-			</mat-list-item>
-		</mat-list>
+				</mat-list-item>
+			</mat-list>
 
-	</mat-expansion-panel>
-	
-</mat-accordion>
+		</mat-expansion-panel>
 
+		<mat-expansion-panel *ngFor="let list of otherLists">
+			<mat-expansion-panel-header>
+				{{list['ownerName']}}
+			</mat-expansion-panel-header>
+
+			<mat-list>
+				<mat-list-item *ngFor="let item of list['items']" class="their-item">
+					<div matLine class="their-item-header">
+						<span>{{item.description}}</span>
+						<button class="their-item-button" mat-raised-button (click)="markBought(item)" *ngIf="!item.buyerComments">
+							I Bought This
+						</button>
+					</div>
+					<div matLine>
+						<item-textarea placeholder="Add your comments here" [(text)]="item.buyerComments" (textChange)="updateItem(item)"></item-textarea>
+					</div>
+				</mat-list-item>
+			</mat-list>
+
+		</mat-expansion-panel>
+		
+	</mat-accordion>
+</div>

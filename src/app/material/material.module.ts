@@ -5,11 +5,12 @@ import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 const modules = [
 	MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatCardModule, MatListModule, MatExpansionModule,
-    MatIconModule,
+    MatIconModule, MatToolbarModule,
 ]
 
 @NgModule({

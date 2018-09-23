@@ -7,7 +7,7 @@ SERVER_BUILD="./node_modules/.bin/tsc -p server/tsconfig.json"
 case "$1" in
 	'build' )
 		$SERVER_BUILD
-		ng build
+		ng build --base-href=/wishlist/
 		;;
 
 	'serve' )

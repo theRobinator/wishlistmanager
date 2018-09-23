@@ -12,7 +12,7 @@ import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core
 			cdkTextareaAutosize
 		    #autosize="cdkTextareaAutosize"
 		    cdkAutosizeMinRows="1"
-		    cdkAutosizeMaxRows="5"
+		    cdkAutosizeMaxRows="3"
 		    [(ngModel)]="text"
 		    (ngModelChange)="this.textChange.emit($event)"
 		></textarea>
