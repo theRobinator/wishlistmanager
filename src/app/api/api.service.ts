@@ -16,6 +16,10 @@ export class ApiService {
 		private http: HttpClient,
 	) {}
 
+	public checkAuth(): Promise<void> {
+		return this.makeRequest('auth/check');
+	}
+
 	public fetchLists(): Promise<Dictionary<WishList>> {
 		return this.makeRequest('lists/get');
 	}
@@ -64,7 +68,8 @@ export class ApiService {
 						reject(error.error.message);
 					} else if (error.status != 200) {
 						// The backend returned an unsuccessful response code.
-						reject(error.error);
+						const message = error.error['message'];
+						reject(message || error.error);
 					} else {
 						reject(error.message || error);
 					}

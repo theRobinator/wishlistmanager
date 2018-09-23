@@ -41,32 +41,30 @@ export class AuthService {
 		return user.hasGrantedScopes(AuthService.SCOPES);
 	}
 
-	public signIn(): Promise<gapi.auth2.GoogleUser> {
-		if (this.isAuthed()) {
-			return Promise.resolve(this.apiClient.currentUser.get());
+	public async signIn(forceReauth = false): Promise<gapi.auth2.GoogleUser> {
+		if (this.isAuthed() && !forceReauth) {
+			return this.apiClient.currentUser.get();
 		} else if (this.signInDeferred) {
 			return this.signInDeferred;
 		} else {
 			this.signInDeferred = new Deferred();
-			this.initDeferred.then(() => {
-				if (this.isAuthed()) {
-					this.signInDeferred.resolve(this.apiClient.currentUser.get());
-					this.signInDeferred = null;
+			try {
+				await this.initDeferred;
+				let user: gapi.auth2.GoogleUser;
+				if (this.isAuthed() && !forceReauth) {
+					user = this.apiClient.currentUser.get();
 				} else {
-					this.apiClient.signIn().then(user => {
-						this.signInDeferred.resolve(user);
-						this.signInDeferred = null;
-					}, error => {
-						this.signInDeferred.reject(error);
-						this.signInDeferred = null;
-					})
+					user = await this.apiClient.signIn();
 				}
-				return ;
-			}).catch(error => {
+				this.signInDeferred.resolve(user);
+				this.signInDeferred = null;
+				return user;
+
+			} catch (error) {
 				this.signInDeferred.reject(error);
 				this.signInDeferred = null;
-			});
-			return this.signInDeferred;
+				throw error;
+			}
 		}
 	}
 

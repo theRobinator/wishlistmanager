@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 
+import {ApiService} from '../api/api.service';
 import {AuthService} from './auth.service';
+
 
 @Component({
   selector: 'app-auth',
@@ -13,6 +15,7 @@ export class AuthComponent implements OnInit {
 	public hadError: boolean = false;
 
 	constructor(
+		private apiService: ApiService,
 		private authService: AuthService,
 		private router: Router,
 	) { }
@@ -21,17 +24,21 @@ export class AuthComponent implements OnInit {
 		this.signIn();
   	}
 
-  	public signIn() {
+  	public async signIn(forceReauth: boolean = false) {
   		this.message = 'Logging in...';
   		this.hadError = false;
-  		this.authService.signIn().then(user => {
-			const profile = user.getBasicProfile();
+  		try {
+  			const user = await this.authService.signIn(forceReauth);
+  			await this.apiService.checkAuth();
+
+  			const profile = user.getBasicProfile();
 			this.message = `You are signed in as ${profile.getName()} with email address ${profile.getEmail()}!`;
 			this.router.navigateByUrl('/lists');
-		}, error => {
-			this.message = `Sign in failed with error ${error['error']}`;
+  		} catch (error) {
+  			const message = error['error'] || error;
+  			this.message = `Sign in failed with an error: ${message}`;
 			this.hadError = true;
-		});
+  		}
   	}
 
 }

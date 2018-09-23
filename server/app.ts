@@ -15,6 +15,7 @@ process.on('unhandledRejection', reason => {
 
 app.use(bodyParser.json());
 
+app.post('/auth/check', authMiddleware, (req, res) => { res.write('{}'); res.end(); });
 app.post('/lists/get', authMiddleware, Endpoints.listsGet);
 app.post('/items/add', authMiddleware, Endpoints.itemsAdd);
 app.post('/items/delete', authMiddleware, Endpoints.itemsDelete);

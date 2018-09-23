@@ -9,6 +9,9 @@
     "typeRoots": [
       "node_modules/google-auth-library/build/src/auth"
     ],
+    "types": [
+      "../types/dictionary"
+    ],
     "lib": [
       "es2017"
     ]

@@ -1,17 +1,7 @@
 import * as express from 'express';
 
-const mysql = require('mysql2');
+import {DB_POOL} from './mysql';
 
-// create the connection to database
-const DB_POOL = mysql.createPool({
-	host: 'localhost',
-	user: 'root',
-	password: 'rootroot',
-	database: 'wishlistmanager',
-	waitForConnections: true,
-	connectionLimit: 10,
-	queueLimit: 0,
-});
 
 function writeSuccess(response: express.Response, data: any) {
 	response.writeHead(200, {"Content-Type": "application/json"});
