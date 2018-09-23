@@ -30,9 +30,14 @@
 
 		<mat-list>
 			<mat-list-item *ngFor="let item of list['items']">
-				<div matLine>{{item.description}}</div>
 				<div matLine>
-					<item-textarea placeholder="Add your comments here" [(text)]="item.buyerComments"></item-textarea>
+					{{item.description}}
+					<button mat-raised-button (click)="markBought(item)" *ngIf="!item.buyerComments">
+						I Bought This
+					</button>
+				</div>
+				<div matLine>
+					<item-textarea placeholder="Add your comments here" [(text)]="item.buyerComments" (textChange)="updateItem(item)"></item-textarea>
 				</div>
 			</mat-list-item>
 		</mat-list>

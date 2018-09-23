@@ -62,6 +62,11 @@ export class ListsComponent implements OnInit {
 	}
 
 	public updateItem(item: ListItem) {
+		if (this.authService.getCurrentUser().getBasicProfile().getEmail() === item['ownerEmail'] && !item['description']) {
+			// You aren't allowed to completely delete descriptions
+			return;
+		}
+
 		// Debounce updates that are sent to the server to minimize network traffic
 		if (this.updateTimeouts[item['id']]) {
 			clearTimeout(this.updateTimeouts[item['id']]);
@@ -74,6 +79,9 @@ export class ListsComponent implements OnInit {
 	}
 
 	public deleteItem(item: ListItem) {
+		if (this.updateTimeouts[item['id']]) {
+			clearTimeout(this.updateTimeouts[item['id']]);
+		}
 		this.loadingItems[item['id']] = true;
 		this.apiService.deleteFromList(item['id']).then(
 			() => {
@@ -88,6 +96,12 @@ export class ListsComponent implements OnInit {
 				this.handleApiError(error);
 				this.loadingItems[item['id']] = false;
 			});
+	}
+
+	public markBought(item: ListItem) {
+		const name = this.authService.getCurrentUser().getBasicProfile().getName().split(' ')[0];
+		item['buyerComments'] = `${name} bought this!`;
+		this.updateItem(item);
 	}
 
 	private resetNewItem() {

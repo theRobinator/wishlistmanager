@@ -40,7 +40,6 @@ export function listsGet(request: express.Request, response: express.Response) {
 		// Separate items by owner
 		const lists: Dictionary<object> = {};
 		for (const textRow of results) {
-			console.log(textRow);
 			const email = textRow['email'];
 			if (!lists[email]) {
 				lists[email] = {
@@ -148,7 +147,7 @@ export function itemsUpdate(request: express.Request, response: express.Response
 		}
 		const field = results[0]['ownerEmail'] === request['authedUserEmail'] ? 'description' : 'buyerComments';
 		const newValue = request.body[field];
-		if (!newValue || typeof newValue !== 'string' || newValue.length >= 1024) {
+		if (typeof newValue !== 'string' || newValue.length >= 1024 || (field === 'description' && newValue.length === 0)) {
 			writeError(response, 400, "Missing or invalid '" + field + "' supplied");
 			return;
 		}
@@ -158,7 +157,6 @@ export function itemsUpdate(request: express.Request, response: express.Response
 				writeError(response, 500, "Failed to read from the database");
 				return;
 			}
-			console.log(results);
 			writeSuccess(response, {
 				'id': results['insertId'],
 				'ownerEmail': request['authedUserEmail'],
