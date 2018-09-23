@@ -13,7 +13,13 @@ export class AuthService {
 	private signInDeferred: Deferred<gapi.auth2.GoogleUser>;
 
 	constructor() {
-		gapi.load('client:auth2', this.initializeClient.bind(this));
+		if (document.readyState != 'complete') {
+			window.addEventListener('load', () => {
+				gapi.load('client:auth2', this.initializeClient.bind(this));
+			})
+		} else {
+			gapi.load('client:auth2', this.initializeClient.bind(this));
+		}
 		this.initDeferred = new Deferred();
 	}
 
