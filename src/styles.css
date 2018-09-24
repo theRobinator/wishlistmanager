@@ -14,12 +14,16 @@ mat-expansion-panel-header {
 	font-weight: bold !important;
 }
 
+.flex-container {
+	display: flex !important;
+}
+
 .list-container {
 	max-width: 1024px;
 	margin: 84px auto 0 auto;
 }
 
-.my-item-text {
+.item-text {
 	flex: 1 1 auto;
 }
 
@@ -33,8 +37,17 @@ mat-expansion-panel-header {
 }
 
 .their-item-button {
-	margin: 10px !important;
-	position: absolute !important;
-	right: 0;
-	z-index: 1;
+	flex: 0 0 auto;
+	margin: 8px !important;
+}
+
+@media(min-width: 420px) {
+	.their-item-skinny { display: none !important; }
+}
+@media(max-width: 419px) {
+	.their-item-wide { display: none !important; }
+	.their-item-button {
+		min-width: 40px !important;
+		padding: 0 !important;
+	}
 }

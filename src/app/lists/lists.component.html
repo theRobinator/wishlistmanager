@@ -8,11 +8,11 @@
 
 			<mat-list>
 				<mat-list-item *ngFor="let item of myItems">
-					<item-textarea class="my-item-text" placeholder="I want..." [(text)]="item.description" (textChange)="updateItem(item)"></item-textarea>
+					<item-textarea class="item-text" placeholder="I want..." [(text)]="item.description" (textChange)="updateItem(item)"></item-textarea>
 					<mat-icon class="my-delete-button" color="warn" (click)="deleteItem(item)">delete</mat-icon>
 				</mat-list-item>
 				<mat-list-item>
-					<item-textarea class="my-item-text" placeholder="Add a new item here" [(text)]="newItem.description"></item-textarea>
+					<item-textarea class="item-text" placeholder="Add a new item here" [(text)]="newItem.description"></item-textarea>
 				</mat-list-item>
 				<mat-list-item>
 					<button mat-raised-button (click)="addItem()" [disabled]="addingItem || !newItem.description">
@@ -32,12 +32,13 @@
 				<mat-list-item *ngFor="let item of list['items']" class="their-item">
 					<div matLine class="their-item-header">
 						<span>{{item.description}}</span>
-						<button class="their-item-button" mat-raised-button (click)="markBought(item)" *ngIf="!item.buyerComments">
-							I Bought This
-						</button>
 					</div>
-					<div matLine>
-						<item-textarea placeholder="Add your comments here" [(text)]="item.buyerComments" (textChange)="updateItem(item)"></item-textarea>
+					<div matLine class="flex-container">
+						<item-textarea class="item-text" placeholder="Add your comments here" [(text)]="item.buyerComments" (textChange)="updateItem(item)"></item-textarea>
+						<button class="their-item-button" mat-raised-button (click)="markBought(item)" *ngIf="!item.buyerComments">
+							<span class="their-item-wide">I Bought This</span>
+							<mat-icon class="their-item-skinny">done</mat-icon>
+						</button>
 					</div>
 				</mat-list-item>
 			</mat-list>
