@@ -23,6 +23,11 @@ case "$1" in
 		ng serve --live-reload false --proxy-config proxy.conf.json
 		;;
 
+	'zip' )
+		./build.sh build
+		zip -r wishlist.zip dist package*
+		;;
+
 	* )
 		ng $@
 		;;
