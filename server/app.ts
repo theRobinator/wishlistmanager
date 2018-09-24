@@ -15,12 +15,17 @@ process.on('unhandledRejection', reason => {
 
 app.use(bodyParser.json());
 
-app.post('/auth/check', authMiddleware, (req, res) => { res.write('{}'); res.end(); });
-app.post('/lists/get', authMiddleware, Endpoints.listsGet);
-app.post('/items/add', authMiddleware, Endpoints.itemsAdd);
-app.post('/items/delete', authMiddleware, Endpoints.itemsDelete);
-app.post('/items/update', authMiddleware, Endpoints.itemsUpdate);
+app.use('/wishlist', express.static('dist/wishlist'));
+app.get(/^\/wishlist\/[^\.]+/, (req, res) => res.redirect('/wishlist'));
 
-app.listen(3000, () => {
-	console.log('Node server listening on port 3000');
+app.post('/api/auth/check', authMiddleware, (req, res) => { res.write('{}'); res.end(); });
+app.post('/api/lists/get', authMiddleware, Endpoints.listsGet);
+app.post('/api/items/add', authMiddleware, Endpoints.itemsAdd);
+app.post('/api/items/delete', authMiddleware, Endpoints.itemsDelete);
+app.post('/api/items/update', authMiddleware, Endpoints.itemsUpdate);
+
+const port = 3000;
+
+app.listen(port, () => {
+	console.log('Node server listening on port ' + port);
 });
