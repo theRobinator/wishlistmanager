@@ -14,7 +14,7 @@ import {WishList} from '../models/wishlist';
 export class ListsComponent implements OnInit {
 	private static readonly UPDATE_TIMEOUT = 1000;
 
-	public myItems: ListItem[];
+	public myItems: ListItem[] = [];
 	public otherLists: WishList[] = [];
 	public newItem: ListItem;
 	public addingItem: boolean = false;
