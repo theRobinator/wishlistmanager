@@ -141,7 +141,7 @@ export function itemsUpdate(request: express.Request, response: express.Response
 			writeError(response, 400, "Missing or invalid '" + field + "' supplied");
 			return;
 		}
-		DB_POOL.execute(`UPDATE ITEMS SET ${field}=? WHERE id=?`, [newValue, id], (err, results, fields) => {
+		DB_POOL.execute(`UPDATE items SET ${field}=? WHERE id=?`, [newValue, id], (err, results, fields) => {
 			if (err) {
 				console.error(err);
 				writeError(response, 500, "Failed to read from the database");
