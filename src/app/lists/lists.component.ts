@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../api/api.service';
 import {AuthService} from '../auth/auth.service';
 import {ListItem} from '../models/listitem';
+import {URL_REGEX} from '../models/urlregex';
 import {WishList} from '../models/wishlist';
 
 
@@ -102,6 +103,12 @@ export class ListsComponent implements OnInit {
 		const name = this.authService.getCurrentUser().getBasicProfile().getName().split(' ')[0];
 		item['buyerComments'] = `${name} bought this!`;
 		this.updateItem(item);
+	}
+
+	public formatDescription(description: string): string {
+		const sanitized = description.replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+									 .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+		return sanitized.replace(URL_REGEX, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
 	}
 
 	private resetNewItem() {

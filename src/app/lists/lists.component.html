@@ -31,7 +31,7 @@
 			<mat-list>
 				<mat-list-item *ngFor="let item of list['items']" class="their-item">
 					<div matLine class="their-item-header">
-						<span>{{item.description}}</span>
+						<span [innerHTML]="formatDescription(item.description)"></span>
 					</div>
 					<div matLine class="flex-container">
 						<item-textarea class="item-text" placeholder="Add your comments here" [(text)]="item.buyerComments" (textChange)="updateItem(item)"></item-textarea>
