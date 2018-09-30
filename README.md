@@ -19,10 +19,12 @@ This project ended up being a great opportunity to get hands-on experience with 
 3. Run `sql/create.sql` in your local MySQL instance, for example with `cat sql/create.sql | mysql -uroot -p<password>`
 4. Choose or create a MySQL user for this app (don't use root in production!)
 5. Create a `mysql.json` file in the root of the checkout with
-	```{
-		"user": "the-mysql-user-name",
-		"password": "that-users-password"
-	}```
+    ```
+    {
+      "user": "the-mysql-user-name",
+      "password": "that-users-password"
+    }
+    ```
 
 
 ## Development
