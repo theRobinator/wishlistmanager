@@ -41,6 +41,12 @@ mat-expansion-panel-header {
 	margin: 8px !important;
 }
 
+.their-item-header {
+	white-space: normal !important;
+	overflow: scroll !important;
+	max-height: 2.5rem;
+}
+
 @media(min-width: 420px) {
 	.their-item-skinny { display: none !important; }
 }
@@ -49,5 +55,8 @@ mat-expansion-panel-header {
 	.their-item-button {
 		min-width: 40px !important;
 		padding: 0 !important;
+	}
+	.mat-expansion-panel-body {
+		padding: 5px !important;
 	}
 }
