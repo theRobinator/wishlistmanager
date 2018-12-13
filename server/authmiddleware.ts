@@ -42,7 +42,7 @@ export async function authMiddleware(request: express.Request, response: express
 	const payload = ticket.getPayload();
 	const userEmail = payload['email'];
 	if (!allowedEmails.has(userEmail)) {
-		fail(response, "This Google account is not authorized to use this app. Please choose another or complain to Robin.");
+		fail(response, `This Google account (${userEmail}) is not authorized to use this app. Please choose another or complain to Robin.`);
 		return;
 	} else {
 		request['authedUserEmail'] = userEmail;
