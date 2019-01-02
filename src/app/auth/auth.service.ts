@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Deferred} from '../models/deferred';
 
+
+/**
+ * The AuthService handles working with the Google auth API.
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -13,10 +17,11 @@ export class AuthService {
 	private signInDeferred: Deferred<gapi.auth2.GoogleUser>;
 
 	constructor() {
+		// If the page is still loading, we should wait for it to complete before loading the Google API
 		if (document.readyState != 'complete') {
 			window.addEventListener('load', () => {
 				gapi.load('client:auth2', this.initializeClient.bind(this));
-			})
+			});
 		} else {
 			gapi.load('client:auth2', this.initializeClient.bind(this));
 		}
@@ -47,6 +52,11 @@ export class AuthService {
 		return user.hasGrantedScopes(AuthService.SCOPES);
 	}
 
+	/**
+	 * Sign the user in using the Google API.
+	 * Note that if the user is already signed in and has authed this app, the initial popup
+	 * window won't appear unless `forceReauth` is passed as true.
+	 */
 	public async signIn(forceReauth = false): Promise<gapi.auth2.GoogleUser> {
 		if (this.isAuthed() && !forceReauth) {
 			return this.apiClient.currentUser.get();

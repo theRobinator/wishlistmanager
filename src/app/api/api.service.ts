@@ -6,6 +6,10 @@ import {ListItem} from '../models/listitem';
 import {WishList} from '../models/wishlist';
 
 
+/**
+ * Service for calling the API. Contains one public method per back-end API endpoint, that returns a promise
+ * that resolves to the endpoint's result.
+ */
 @Injectable({
   providedIn: 'root'
 })

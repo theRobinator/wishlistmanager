@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class AppComponent {
   	constructor(router: Router) {
-  		// Make sure everybody auths first
+  		// Make sure everybody auths first, just in case
   		router.navigateByUrl('/auth');
   	}
 }

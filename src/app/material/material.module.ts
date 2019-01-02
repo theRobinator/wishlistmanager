@@ -8,6 +8,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
 
+/**
+ * This file is organizational only. It contains all the modules that are imported from Angular Material.
+ */
+
+
 const modules = [
 	MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatCardModule, MatListModule, MatExpansionModule,
     MatIconModule, MatToolbarModule,

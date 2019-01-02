@@ -7,6 +7,9 @@ import {URL_REGEX} from '../models/urlregex';
 import {WishList} from '../models/wishlist';
 
 
+/**
+ * This is the main page component of the lists page.
+ */
 @Component({
   selector: 'app-lists',
   templateUrl: './lists.component.html',
@@ -30,6 +33,9 @@ export class ListsComponent implements OnInit {
   		this.resetNewItem();
 	}
 
+	/**
+	 * Refresh data from the API when the page is loaded
+	 */
 	public async ngOnInit() {
 		const result = await this.apiService.fetchLists();
 		const myEmail = this.authService.getCurrentUser().getBasicProfile().getEmail();
