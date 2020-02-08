@@ -23,6 +23,7 @@ export class ListsComponent implements OnInit {
 	public newItem: ListItem;
 	public addingItem: boolean = false;
 	public loadingItems: {[key: number]: boolean} = {};
+	public secretSantaVisible: boolean = false;
 
 	private updateTimeouts: {[key: number]: number} = {};
 
@@ -115,6 +116,10 @@ export class ListsComponent implements OnInit {
 		const sanitized = description.replace(/"/g, '&quot;').replace(/'/g, '&#39;')
 									 .replace(/</g, '&lt;').replace(/>/g, '&gt;');
 		return sanitized.replace(URL_REGEX, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
+	}
+
+	public showSecretSanta(show: boolean): void {
+		this.secretSantaVisible = show;
 	}
 
 	private resetNewItem() {

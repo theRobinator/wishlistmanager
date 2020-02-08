@@ -10,6 +10,7 @@ import {MaterialModule} from './material/material.module';
 import {AppComponent} from './app.component';
 import {AuthComponent} from './auth/auth.component';
 import {ListsComponent} from './lists/lists.component';
+import {SecretSantaPanelComponent} from './secretsantapanel.component';
 
 import {AppRoutingModule} from './app-routing.module';
 
@@ -24,6 +25,7 @@ import { ItemTextareaComponent } from './item-textarea/item-textarea.component';
     AuthComponent,
     ListsComponent,
     ItemTextareaComponent,
+    SecretSantaPanelComponent,
   ],
   imports: [
     BrowserModule,

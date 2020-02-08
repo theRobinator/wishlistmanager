@@ -156,3 +156,30 @@ export function itemsUpdate(request: express.Request, response: express.Response
 		})
 	});
 }
+
+
+export function secretSantaGet(request: express.Request, response: express.Response): void {
+	const year = new Date().getFullYear();
+	DB_POOL.execute('SELECT * FROM secret_santa_themes WHERE year=?', [year], (err, results, fields) => {
+		if (err || !results.length) {
+			writeError(response, 500, "Secret Santa hasn't been set up for this year yet.");
+			return;
+		}
+		const theme = results[0]['theme'];
+		DB_POOL.execute('SELECT * FROM secret_santas WHERE email=? AND year=?', [request['authedUserEmail'], year], (err, results, fields) => {
+			if (err) {
+				console.error(err);
+				writeError(response, 500, "Failed to read from the database");
+				return;
+			} else if (results.length === 0) {
+				writeError(response, 400, "You have no secret santa :(");
+				return;
+			}
+			writeSuccess(response, {
+				theme: theme,
+				person: results[0]['person'],
+			});
+		});
+	})
+}
+

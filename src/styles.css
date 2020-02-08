@@ -1,3 +1,7 @@
+*[hidden] {
+	display: none !important;
+}
+
 body {
 	margin: 0;
 }
@@ -45,6 +49,18 @@ mat-expansion-panel-header {
 	white-space: normal !important;
 	overflow: scroll !important;
 	max-height: 2.5rem;
+}
+
+.fill-remaining-space {
+	flex: 1 1 auto;
+}
+
+.secret-santa-panel {
+	margin-bottom: 15px;
+}
+
+.santa-close-button {
+	float: right;
 }
 
 @media(min-width: 420px) {

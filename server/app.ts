@@ -32,6 +32,7 @@ app.post('/api/lists/get', authMiddleware, Endpoints.listsGet);
 app.post('/api/items/add', authMiddleware, Endpoints.itemsAdd);
 app.post('/api/items/delete', authMiddleware, Endpoints.itemsDelete);
 app.post('/api/items/update', authMiddleware, Endpoints.itemsUpdate);
+app.post('/api/secretsanta/get', authMiddleware, Endpoints.secretSantaGet);
 
 // Start listening for incoming connections
 const port = 3000;

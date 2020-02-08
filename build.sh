@@ -7,7 +7,7 @@ SERVER_BUILD="./node_modules/.bin/tsc -p server/tsconfig.json"
 case "$1" in
 	'build' )
 		$SERVER_BUILD
-		ng build --base-href=/wishlist/ --aot --build-optimizer --prod
+		./node_modules/.bin/ng build --base-href=/wishlist/ --aot --build-optimizer --prod
 		;;
 
 	'serve' )
@@ -20,7 +20,7 @@ case "$1" in
 			kill $NODEMON_PID 2>&1
 		}
 		trap exit SIGINT SIGTERM
-		ng serve --live-reload false --proxy-config proxy.conf.json
+		./node_modules/.bin/ng serve --live-reload false --proxy-config proxy.conf.json
 		;;
 
 	'zip' )
@@ -29,6 +29,6 @@ case "$1" in
 		;;
 
 	* )
-		ng $@
+		./node_modules/.bin/ng $@
 		;;
 esac

@@ -48,6 +48,10 @@ export class ApiService {
 		});
 	}
 
+	public fetchSecretSanta(): Promise<{theme: string, person: string}> {
+		return this.makeRequest('secretsanta/get');
+	}
+
 	/**
 	 * Global request maker that adds common params and promisification.
 	 */

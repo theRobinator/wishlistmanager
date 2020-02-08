@@ -1,5 +1,16 @@
-<mat-toolbar color="primary">Wish List</mat-toolbar>
+<mat-toolbar color="primary">
+	<span>Wish List</span>
+	<span class="fill-remaining-space"></span>
+	<button (click)="showSecretSanta(!secretSantaVisible)" class="secret-santa-button">
+		Secret Santa
+	</button>
+</mat-toolbar>
+
 <div class="list-container">
+	<mat-card [hidden]="!secretSantaVisible" class="secret-santa-panel">
+		<secret-santa-panel (onClose)="showSecretSanta(false)"></secret-santa-panel>
+	</mat-card>
+
 	<mat-accordion>
 		<mat-expansion-panel>
 			<mat-expansion-panel-header>
